@@ -15,8 +15,7 @@ services:
 
   app:
     container_name: inside
-#    image: registry.jborn.tech/021/shopify:latest
-    build: .
+    image: asamusev/public:latest
     ports:
       - "8088:8088"
     restart:
