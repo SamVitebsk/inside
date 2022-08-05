@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="1" author="a.samusev">
+        <createTable tableName="client">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="client_id_pk" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="client_name_unq" />
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <createTable tableName="article">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="article_id_pk" />
+            </column>
+            <column name="message" type="text" />
+            <column name="created_date" type="timestamp" defaultValue="now()"/>
+            <column name="client_id" type="bigint">
+                <constraints nullable="false" notNullConstraintName="item_house_id_nn" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="article"
+                                 baseColumnNames="client_id"
+                                 constraintName="article_client_id_fk"
+                                 referencedTableName="client"
+                                 onUpdate="CASCADE"
+                                 onDelete="CASCADE"
+                                 referencedColumnNames="id" />
+    </changeSet>
+</databaseChangeLog>

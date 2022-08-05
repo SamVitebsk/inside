@@ -1,0 +1,29 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    container_name: inside_postgres
+    ports:
+      - "5431:5432"
+    restart:
+      always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - /var/lib/postgresql:/var/lib/postgresql
+
+  app:
+    container_name: inside
+#    image: registry.jborn.tech/021/shopify:latest
+    build: .
+    ports:
+      - "8088:8088"
+    restart:
+      always
+    environment:
+      POSTGRES_URL: jdbc:postgresql://db:5432/postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    depends_on:
+      - db
