@@ -16,3 +16,7 @@ docker-compose down
 можно его изменить в переменной окружения SERVER_PORT <br /><br />
 Запросы в файле curl.sh<br /><br />
 
+Образ приложения<br />
+https://hub.docker.com/repository/docker/asamusev/public
+
+
